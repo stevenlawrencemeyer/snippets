@@ -9,7 +9,7 @@ This is a complex xpath which requires us to check whether
 certain conditions are true
 
 We collect the links for every movie currently showing and pickle
-Then in a file called href_list.pickle
+Them in a file called href_list.pickle
 """
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -34,17 +34,12 @@ browser = webdriver.Chrome()
 browser.maximize_window() #makes it easier to see what is going on
 
 #Will wait for up to 30 secs when using expected conditions
-#In reality you rpbioably want this to be < 10 seconds
+#In reality you probably want this to be < 10 seconds
 wait = WebDriverWait(browser, 30) 
 
 BF = BrowserFuncs(browser, EC, By, datetime) #see browserfuncs file
 
 GF = GenFuncs(pickle, os, datetime, sys)
-
-#In this example we are going to collect a list of 
-#links associated with movies from the Hoyts movie website
-#we are going to save the result in a pickle file
-
 
 
 xpath = '//div[contains(@class, "movie-list-item")]'
@@ -92,7 +87,7 @@ browser.quit()
 
 
 #we now pickle the list of hrefs
-#datfiles is a subdirectory os this one
+#datfiles is a subdirectory of this one
 fname = 'datfiles/href_list.pickle'
 max_tries = 4
 

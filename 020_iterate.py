@@ -2,8 +2,7 @@
 
 We iterate through every movie collecting the names
 of the cinemas in the state of Victoria
-Where they are playing
-We put them in a dictionary and pickle
+Where they are playing and pickle the data
 
 
 """
@@ -36,7 +35,7 @@ wait = WebDriverWait(browser, 5)
 BF = BrowserFuncs(browser, EC, By, datetime) #see browserfuncs file
 GF = GenFuncs(pickle, os, datetime, sys)
 
-#Will explain this later
+#Will explain this in a future set of examples
 cleansed_allowed = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
 
@@ -65,18 +64,12 @@ xpath2+= '//a[contains(@class, "state") and text() = "VIC"]'
 #We will use this to get list of VIC movie houses
 #Where movie is playing (There may be none in VIC)
 
-#We will use this to get list of VIC movie houses
-#Where movie is playing (There may be none in VIC)
 xpath3 = '//div[contains(@class, "row") and contains(@class, "cinemas")]'
 #exclude elements where the class contains "off-opacity"
+#"off_opacity" is contained in the class if the movie is not showing
+#In this cinema
 xpath3+= '//div[contains(@class, "cinema-selector") and not(contains(@class, "off-opacity"))]'
 xpath3+= '//a//span[contains(@class, "text")]'
-
-
-
-
-
-
 
 movie_nbr = 0
 movie_max_tries = 4
@@ -93,9 +86,9 @@ for mlink in movie_links:
 	for movie_tries in range(movie_max_tries):
 		print('movie_tries= ' + str(movie_tries))
 		try:
-			#get movie name from file created in previous program
 			elem = BF.get_elem_by_css_simple(selector, wait)
 			movie_name = elem.text
+			# Will explain the reason for this in next set of examples
 			movie_key = GF.cleanse_str(cleansed_allowed, movie_name)
 			dict1 = {'movie_name':movie_name, 'movie_key':movie_key, 
 			'movie_link':mlink}
@@ -107,7 +100,7 @@ for mlink in movie_links:
 			vic_btn.click()
 			#NB We cannot use expected conditions because we do not know
 			#whether a particular movie is playing in any Victorian movie house
-			#it may be plainging in none
+			#it may be playing in none
 			#So, instead we get the list with an implict wait
 			elem_list = BF.get_list_by_xpath(xpath3, wait_time)
 			print(movie_name)
