@@ -9,7 +9,7 @@ Hope you find this useful.
 
 NB:
 
-I do not claim to be an expert. If you are more epxerienced than me I would welcome any critique of what I have done.
+I do not claim to be an expert. In fact, I am a newbie. If you are more experienced than me I would welcome any critique of what I have done.
 
 
 
